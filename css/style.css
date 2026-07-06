@@ -1,0 +1,369 @@
+/* Linux Lab — GNOME-terminal-inspired look */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&family=Ubuntu:wght@400;500;700&display=swap');
+
+:root {
+  --term-bg: #300a24;            /* Ubuntu terminal aubergine */
+  --term-fg: #ffffff;
+  --term-green: #4e9a06;
+  --term-green-bright: #8ae234;
+  --term-blue: #729fcf;
+  --term-blue-bright: #34e2e2;
+  --term-red: #ef2929;
+  --term-yellow: #fce94f;
+  --titlebar-bg: #3d3d3d;
+  --titlebar-fg: #dfdbd2;
+  --panel-bg: #f5f4f2;
+  --panel-border: #d5d2cc;
+  --accent: #e95420;             /* Ubuntu orange */
+  --mono: 'Ubuntu Mono', 'DejaVu Sans Mono', 'Menlo', 'Consolas', monospace;
+  --ui: 'Ubuntu', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #2c2c2c;
+  font-family: var(--ui);
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  gap: 0;
+}
+
+/* ============ terminal window ============ */
+
+.terminal-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px;
+}
+
+.terminal-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.55);
+  position: relative;
+}
+
+.titlebar {
+  background: linear-gradient(#4a4a4a, var(--titlebar-bg));
+  color: var(--titlebar-fg);
+  height: 34px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 13px;
+  user-select: none;
+  flex: none;
+}
+
+.titlebar .traffic {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+.titlebar .traffic span {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.tl-close { background: #f46b5d; }
+.tl-min   { background: #f9bd4e; }
+.tl-max   { background: #57c353; }
+
+.titlebar .title {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.titlebar .spacer { width: 55px; }
+
+.term-screen {
+  flex: 1;
+  background: var(--term-bg);
+  color: var(--term-fg);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.32;
+  padding: 8px 10px 14px;
+  overflow-y: auto;
+  cursor: text;
+  outline: none;
+}
+
+.term-output, .term-input-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* prompt colors — Ubuntu default PS1 */
+.prompt-user { color: var(--term-green-bright); font-weight: 700; }
+.prompt-root { color: var(--term-red); font-weight: 700; }
+.prompt-dir  { color: var(--term-blue); font-weight: 700; }
+
+/* ls colors */
+.c-dir { color: var(--term-blue); font-weight: 700; }
+.c-exe { color: var(--term-green-bright); font-weight: 700; }
+.c-lnk { color: var(--term-blue-bright); font-weight: 700; }
+
+/* cursor */
+.cursor {
+  background: var(--term-fg);
+  color: var(--term-bg);
+}
+.cursor.blink-off {
+  background: transparent;
+  color: var(--term-fg);
+}
+
+/* lab feedback inside terminal */
+.lab-banner { color: var(--term-yellow); font-weight: 700; }
+.task-done  { color: var(--term-green-bright); }
+
+/* scrollbar */
+.term-screen::-webkit-scrollbar { width: 10px; }
+.term-screen::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
+.term-screen::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 5px; }
+
+/* ============ editor overlay (nano / vi) ============ */
+
+.editor-overlay {
+  position: absolute;
+  top: 34px; left: 0; right: 0; bottom: 0;
+  background: var(--term-bg);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--mono);
+  font-size: 15px;
+  z-index: 10;
+}
+
+.editor-header {
+  background: #d5d2cc;
+  color: #300a24;
+  font-weight: 700;
+  padding: 2px 8px;
+  white-space: pre;
+  min-height: 22px;
+}
+
+.editor-textarea {
+  flex: 1;
+  background: var(--term-bg);
+  color: var(--term-fg);
+  border: none;
+  resize: none;
+  outline: none;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.32;
+  padding: 6px 10px;
+  caret-color: #fff;
+}
+
+.editor-status {
+  color: var(--term-yellow);
+  padding: 1px 8px;
+  min-height: 20px;
+}
+
+.editor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  background: var(--term-bg);
+  color: var(--term-fg);
+  padding: 4px 8px 8px;
+  font-size: 14px;
+}
+.editor-footer b {
+  background: #d5d2cc;
+  color: #300a24;
+  padding: 0 4px;
+  font-weight: 700;
+}
+
+/* ============ lab panel ============ */
+
+.lab-panel {
+  width: 340px;
+  flex: none;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  display: flex;
+  flex-direction: column;
+  transition: margin-right .25s ease;
+}
+.lab-panel.collapsed { margin-right: -340px; }
+
+.lab-panel-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#lab-panel-content {
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+  font-size: 14px;
+  color: #3b3b3b;
+}
+
+.panel-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  padding: 14px 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--ui);
+  z-index: 5;
+  writing-mode: vertical-rl;
+}
+
+.lab-progress { margin-bottom: 14px; }
+.lab-progress-label { font-size: 12.5px; color: #666; margin-bottom: 4px; }
+.lab-progress-bar {
+  height: 8px;
+  background: #e0ddd8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.lab-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width .4s ease;
+}
+
+.lab-select-label { font-size: 12.5px; color: #666; display: block; margin-bottom: 4px; }
+.lab-select {
+  width: 100%;
+  padding: 7px 8px;
+  font-family: var(--ui);
+  font-size: 13.5px;
+  border: 1px solid var(--panel-border);
+  border-radius: 5px;
+  background: #fff;
+  margin-bottom: 16px;
+}
+
+.lab-active-title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.lab-intro { font-size: 13px; color: #555; margin-bottom: 12px; line-height: 1.45; }
+.lab-intro code {
+  background: #e8e5e0;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--mono);
+}
+
+.lab-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.lab-tasks li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.lab-tasks li.done    { background: #e7f3e2; color: #3b6e2a; }
+.lab-tasks li.current { background: #fff; border: 1px solid var(--accent); }
+.lab-tasks li.locked  { color: #a5a29c; }
+
+.task-check { font-weight: 700; flex: none; }
+.lab-tasks li.done .task-check { color: #4e9a06; }
+.task-text { flex: 1; min-width: 0; }
+
+.hint-btn {
+  background: none;
+  border: 1px solid #c9c5be;
+  border-radius: 4px;
+  font-size: 11.5px;
+  color: #857f76;
+  cursor: pointer;
+  padding: 1px 8px;
+  font-family: var(--ui);
+}
+.hint-btn:hover { border-color: var(--accent); color: var(--accent); }
+.hint-body {
+  flex-basis: 100%;
+  font-size: 12.5px;
+  color: #6d675e;
+  background: #faf6ee;
+  border-left: 3px solid var(--term-yellow);
+  padding: 6px 9px;
+  border-radius: 0 4px 4px 0;
+}
+
+.lab-reset {
+  background: none;
+  border: 1px solid #c9c5be;
+  color: #857f76;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+  font-family: var(--ui);
+}
+.lab-reset:hover { border-color: #b00; color: #b00; }
+
+.lab-panel-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--panel-border);
+  font-size: 11.5px;
+  color: #8b867e;
+}
+
+/* ============ responsive ============ */
+
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .lab-panel {
+    width: 100%;
+    max-height: 40vh;
+    border-left: none;
+    border-top: 1px solid var(--panel-border);
+    order: 2;
+  }
+  .lab-panel.collapsed { margin-right: 0; display: none; }
+  .panel-toggle {
+    writing-mode: horizontal-tb;
+    top: auto; bottom: 0;
+    transform: none;
+    border-radius: 6px 6px 0 0;
+    padding: 4px 14px;
+  }
+  .terminal-wrap { padding: 8px; }
+}

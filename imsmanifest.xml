@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.linuxlab.scorm" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="linuxlab_org">
+    <organization identifier="linuxlab_org">
+      <title>Linux Command Line Labs</title>
+      <item identifier="item_1" identifierref="resource_1" isvisible="true">
+        <title>Linux Command Line Labs (15 labs, 10 points each)</title>
+        <adlcp:masteryscore>100</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="resource_1" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="css/style.css"/>
+      <file href="js/scorm.js"/>
+      <file href="js/fs.js"/>
+      <file href="js/shell.js"/>
+      <file href="js/commands.js"/>
+      <file href="js/commands-sys.js"/>
+      <file href="js/terminal.js"/>
+      <file href="js/main.js"/>
+      <file href="js/labs/registry.js"/>
+      <file href="js/labs/lab01-rescue-mode.js"/>
+      <file href="js/labs/lab02-network-env.js"/>
+      <file href="js/labs/lab03-display-server.js"/>
+      <file href="js/labs/lab04-locale-time.js"/>
+      <file href="js/labs/lab05-filesystems.js"/>
+      <file href="js/labs/lab06-packages.js"/>
+      <file href="js/labs/lab07-shared-directory.js"/>
+      <file href="js/labs/lab08-logging.js"/>
+      <file href="js/labs/lab09-encrypted-disk.js"/>
+      <file href="js/labs/lab10-processes.js"/>
+      <file href="js/labs/lab11-usb-devices.js"/>
+      <file href="js/labs/lab12-app-permissions.js"/>
+      <file href="js/labs/lab13-password-script.js"/>
+      <file href="js/labs/lab14-job-control.js"/>
+      <file href="js/labs/lab15-containers.js"/>
+    </resource>
+  </resources>
+</manifest>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Command Line Lab</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <div class="terminal-wrap">
+      <div class="terminal-window" id="terminal">
+        <div class="titlebar">
+          <div class="traffic">
+            <span class="tl-close"></span><span class="tl-min"></span><span class="tl-max"></span>
+          </div>
+          <div class="title" id="term-title">student@linuxlab: ~</div>
+          <div class="spacer"></div>
+        </div>
+        <div class="term-screen" tabindex="0">
+          <div class="term-output"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="panel-toggle" id="panel-toggle" title="Show/hide lab instructions">Lab&nbsp;Panel</button>
+
+    <aside class="lab-panel" id="lab-panel">
+      <div class="lab-panel-header">
+        <span>📋 Lab Exercises</span>
+      </div>
+      <div id="lab-panel-content"></div>
+      <div class="lab-panel-footer">
+        Progress is saved automatically to the gradebook. Password for <b>sudo</b>: <code>student</code>
+      </div>
+    </aside>
+  </div>
+
+  <script src="js/scorm.js"></script>
+  <script src="js/fs.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/commands.js"></script>
+  <script src="js/commands-sys.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/labs/registry.js"></script>
+
+  <!-- ==== LABS: one file per lab (10 points each) ==== -->
+  <script src="js/labs/lab01-rescue-mode.js"></script>
+  <script src="js/labs/lab02-network-env.js"></script>
+  <script src="js/labs/lab03-display-server.js"></script>
+  <script src="js/labs/lab04-locale-time.js"></script>
+  <script src="js/labs/lab05-filesystems.js"></script>
+  <script src="js/labs/lab06-packages.js"></script>
+  <script src="js/labs/lab07-shared-directory.js"></script>
+  <script src="js/labs/lab08-logging.js"></script>
+  <script src="js/labs/lab09-encrypted-disk.js"></script>
+  <script src="js/labs/lab10-processes.js"></script>
+  <script src="js/labs/lab11-usb-devices.js"></script>
+  <script src="js/labs/lab12-app-permissions.js"></script>
+  <script src="js/labs/lab13-password-script.js"></script>
+  <script src="js/labs/lab14-job-control.js"></script>
+  <script src="js/labs/lab15-containers.js"></script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
